@@ -1,0 +1,126 @@
+{
+  "schema": 1,
+  "metadata": {
+    "robot": "ur5e",
+    "task": "cup_plate",
+    "seeds": 12,
+    "source_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "stride": 5,
+    "phases": [
+      0,
+      5,
+      10,
+      15,
+      20,
+      25,
+      30,
+      35,
+      40,
+      45,
+      50,
+      55,
+      60,
+      65,
+      70,
+      75,
+      80,
+      85,
+      90,
+      95,
+      98,
+      100,
+      105,
+      110,
+      115,
+      120,
+      125,
+      130,
+      135,
+      138,
+      140,
+      145,
+      150,
+      155,
+      160,
+      165,
+      170,
+      175,
+      180,
+      183,
+      185,
+      190,
+      195,
+      200,
+      205,
+      210,
+      215,
+      218,
+      220,
+      225,
+      230,
+      235,
+      236
+    ],
+    "source": "physical_controller_initial_states_no_action_labels",
+    "scenes_sha256": "b95f6c6f19060386f879b38de02f2f24dc56f5bbf365d922f99b6ac2937001ac",
+    "model_sha256": "e8bb290a3e64cced1cbd44ce4a5d3e6d4bd4edaaefa2824b8ea391b234c6e03f",
+    "source_bank_sha256": "99d32b3fe76bbdc38ea35a8fac5306d514cb33299cefc068c9e8a3642dce208d"
+  },
+  "arrays": {
+    "qpos": {
+      "shape": [
+        15
+      ],
+      "dtype": "float64"
+    },
+    "qvel": {
+      "shape": [
+        14
+      ],
+      "dtype": "float64"
+    },
+    "ctrl": {
+      "shape": [
+        8
+      ],
+      "dtype": "float64"
+    },
+    "ee_target": {
+      "shape": [
+        3
+      ],
+      "dtype": "float64"
+    },
+    "goals": {
+      "shape": [
+        1,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "rgba": {
+      "shape": [
+        72,
+        4
+      ],
+      "dtype": "float32"
+    },
+    "phase": {
+      "shape": [],
+      "dtype": "int64"
+    }
+  }
+}

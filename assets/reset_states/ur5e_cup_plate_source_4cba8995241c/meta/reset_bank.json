@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "metadata": {
+    "robot": "ur5e",
+    "task": "cup_plate",
+    "seeds": 12,
+    "source": "physical_controller_initial_states_no_action_labels",
+    "scenes_sha256": "b95f6c6f19060386f879b38de02f2f24dc56f5bbf365d922f99b6ac2937001ac",
+    "model_sha256": "e8bb290a3e64cced1cbd44ce4a5d3e6d4bd4edaaefa2824b8ea391b234c6e03f",
+    "source_bank_sha256": "4cba8995241c7b5e221da0b6f22ac4d7bb1e90f05551c42f6409260e676bfbda"
+  },
+  "arrays": {
+    "qpos": {
+      "shape": [
+        15
+      ],
+      "dtype": "float64"
+    },
+    "qvel": {
+      "shape": [
+        14
+      ],
+      "dtype": "float64"
+    },
+    "ctrl": {
+      "shape": [
+        8
+      ],
+      "dtype": "float64"
+    },
+    "ee_target": {
+      "shape": [
+        3
+      ],
+      "dtype": "float64"
+    },
+    "goals": {
+      "shape": [
+        1,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "rgba": {
+      "shape": [
+        72,
+        4
+      ],
+      "dtype": "float32"
+    },
+    "phase": {
+      "shape": [],
+      "dtype": "int64"
+    }
+  }
+}

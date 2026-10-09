@@ -1,0 +1,11 @@
+{
+  "geom": {
+    "table_top": {"rgba": [0.55, 0.52, 0.48, 1.0], "friction": [0.9, 0.01, 0.001]}
+  },
+  "light": {
+    "key_light": {"diffuse": [0.75, 0.78, 0.8]}
+  },
+  "camera": {
+    "overview": {"fovy": [50]}
+  }
+}

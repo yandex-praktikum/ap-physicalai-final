@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "report": "REPORT.md",
+  "models": [
+    {
+      "robot": "ur5e",
+      "task": "cup_plate",
+      "rl": "artifacts/ur5e/cup_plate/rl/last.zip",
+      "bc_baseline": "artifacts/ur5e/cup_plate/baseline/best.ts",
+      "bc_proprio": "artifacts/ur5e/cup_plate/proprio/best.ts",
+      "bc_robust": "artifacts/ur5e/cup_plate/robust/best.ts"
+    }
+  ]
+}

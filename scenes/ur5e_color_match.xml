@@ -1,0 +1,221 @@
+<mujoco model="ur5e_color_match">
+  <compiler angle="radian" meshdir="../assets/universal_robots_ur5e/assets" autolimits="true" />
+  <option integrator="implicitfast" timestep=".001" cone="elliptic" />
+  <default>
+    <default class="ur5e">
+      <material specular="0.5" shininess="0.25" />
+      <joint axis="0 1 0" range="-6.28319 6.28319" armature="0.1" />
+      <general gaintype="fixed" biastype="affine" ctrlrange="-6.2831 6.2831" gainprm="2000" biasprm="0 -2000 -400" forcerange="-150 150" />
+      <default class="size3">
+        <default class="size3_limited">
+          <joint range="-3.1415 3.1415" />
+          <general ctrlrange="-3.1415 3.1415" />
+        </default>
+      </default>
+      <default class="size1">
+        <general gainprm="500" biasprm="0 -500 -100" forcerange="-28 28" />
+      </default>
+      <default class="visual">
+        <geom type="mesh" contype="0" conaffinity="0" group="2" />
+      </default>
+      <default class="collision">
+        <geom type="capsule" group="3" />
+        <default class="eef_collision">
+          <geom type="cylinder" />
+        </default>
+      </default>
+      <site size="0.001" rgba="0.5 0.5 0.5 0.3" group="4" />
+    </default>
+    <default class="tool">
+      <geom type="box" friction="1.3 .01 .001" condim="4" rgba=".2 .2 .23 1" />
+      <joint type="slide" damping="3" armature=".01" limited="true" range="0 .045" />
+    </default>
+  </default>
+  <asset>
+    <material class="ur5e" name="black" rgba="0.033 0.033 0.033 1" />
+    <material class="ur5e" name="jointgray" rgba="0.278 0.278 0.278 1" />
+    <material class="ur5e" name="linkgray" rgba="0.82 0.82 0.82 1" />
+    <material class="ur5e" name="urblue" rgba="0.49 0.678 0.8 1" />
+    <mesh file="base_0.obj" />
+    <mesh file="base_1.obj" />
+    <mesh file="shoulder_0.obj" />
+    <mesh file="shoulder_1.obj" />
+    <mesh file="shoulder_2.obj" />
+    <mesh file="upperarm_0.obj" />
+    <mesh file="upperarm_1.obj" />
+    <mesh file="upperarm_2.obj" />
+    <mesh file="upperarm_3.obj" />
+    <mesh file="forearm_0.obj" />
+    <mesh file="forearm_1.obj" />
+    <mesh file="forearm_2.obj" />
+    <mesh file="forearm_3.obj" />
+    <mesh file="wrist1_0.obj" />
+    <mesh file="wrist1_1.obj" />
+    <mesh file="wrist1_2.obj" />
+    <mesh file="wrist2_0.obj" />
+    <mesh file="wrist2_1.obj" />
+    <mesh file="wrist2_2.obj" />
+    <mesh file="wrist3.obj" />
+  </asset>
+  <worldbody>
+    <light name="spotlight" mode="targetbodycom" target="wrist_2_link" pos="0 -1 2" />
+    <body name="base" quat="0 0 0 -1" childclass="ur5e" pos="0 0 .4">
+      <inertial mass="4.0" pos="0 0 0" diaginertia="0.00443333156 0.00443333156 0.0072" />
+      <geom mesh="base_0" material="black" class="visual" />
+      <geom mesh="base_1" material="jointgray" class="visual" />
+      <body name="shoulder_link" pos="0 0 0.163">
+        <inertial mass="3.7" pos="0 0 0" diaginertia="0.0102675 0.0102675 0.00666" />
+        <joint name="shoulder_pan_joint" class="size3" axis="0 0 1" />
+        <geom mesh="shoulder_0" material="urblue" class="visual" />
+        <geom mesh="shoulder_1" material="black" class="visual" />
+        <geom mesh="shoulder_2" material="jointgray" class="visual" />
+        <geom class="collision" size="0.06 0.06" pos="0 0 -0.04" />
+        <body name="upper_arm_link" pos="0 0.138 0" quat="1 0 1 0">
+          <inertial mass="8.393" pos="0 0 0.2125" diaginertia="0.133886 0.133886 0.0151074" />
+          <joint name="shoulder_lift_joint" class="size3" />
+          <geom mesh="upperarm_0" material="linkgray" class="visual" />
+          <geom mesh="upperarm_1" material="black" class="visual" />
+          <geom mesh="upperarm_2" material="jointgray" class="visual" />
+          <geom mesh="upperarm_3" material="urblue" class="visual" />
+          <geom class="collision" pos="0 -0.04 0" quat="1 1 0 0" size="0.06 0.06" />
+          <geom class="collision" size="0.05 0.2" pos="0 0 0.2" />
+          <body name="forearm_link" pos="0 -0.131 0.425">
+            <inertial mass="2.275" pos="0 0 0.196" diaginertia="0.0311796 0.0311796 0.004095" />
+            <joint name="elbow_joint" class="size3_limited" />
+            <geom mesh="forearm_0" material="urblue" class="visual" />
+            <geom mesh="forearm_1" material="linkgray" class="visual" />
+            <geom mesh="forearm_2" material="black" class="visual" />
+            <geom mesh="forearm_3" material="jointgray" class="visual" />
+            <geom class="collision" pos="0 0.08 0" quat="1 1 0 0" size="0.055 0.06" />
+            <geom class="collision" size="0.038 0.19" pos="0 0 0.2" />
+            <body name="wrist_1_link" pos="0 0 0.392" quat="1 0 1 0">
+              <inertial mass="1.219" pos="0 0.127 0" diaginertia="0.0025599 0.0025599 0.0021942" />
+              <joint name="wrist_1_joint" class="size1" />
+              <geom mesh="wrist1_0" material="black" class="visual" />
+              <geom mesh="wrist1_1" material="urblue" class="visual" />
+              <geom mesh="wrist1_2" material="jointgray" class="visual" />
+              <geom class="collision" pos="0 0.05 0" quat="1 1 0 0" size="0.04 0.07" />
+              <body name="wrist_2_link" pos="0 0.127 0">
+                <inertial mass="1.219" pos="0 0 0.1" diaginertia="0.0025599 0.0025599 0.0021942" />
+                <joint name="wrist_2_joint" axis="0 0 1" class="size1" />
+                <geom mesh="wrist2_0" material="black" class="visual" />
+                <geom mesh="wrist2_1" material="urblue" class="visual" />
+                <geom mesh="wrist2_2" material="jointgray" class="visual" />
+                <geom class="collision" size="0.04 0.06" pos="0 0 0.04" />
+                <geom class="collision" pos="0 0.02 0.1" quat="1 1 0 0" size="0.04 0.04" />
+                <body name="wrist_3_link" pos="0 0 0.1">
+                  <inertial mass="0.1889" pos="0 0.0771683 0" quat="1 0 0 1" diaginertia="0.000132134 9.90863e-05 9.90863e-05" />
+                  <joint name="wrist_3_joint" class="size1" />
+                  <geom material="linkgray" mesh="wrist3" class="visual" />
+                  <geom class="eef_collision" pos="0 0.08 0" quat="1 1 0 0" size="0.04 0.02" />
+                  <site name="attachment_site" pos="0 0.1 0" quat="-1 1 0 0" />
+                  <body name="tool" pos="0 0.1 0" quat="-1 1 0 0" childclass="tool">
+                    <geom name="palm" size=".038 .04 .015" mass=".15" />
+                    <site name="grasp" pos="0 0 .09" size=".003" rgba="0 1 0 1" />
+                    <camera name="wrist" pos=".06 0 .01" xyaxes="0 -1 0 1 0 0" fovy="75" />
+                    <body name="left_finger" pos="0 0.008 0">
+                      <joint name="left_jaw" axis="0 1 0" />
+                      <geom name="left_pad" pos="0 0 .072" size=".035 .006 .043" mass=".05" />
+                    </body>
+                    <body name="right_finger" pos="0 -0.008 0">
+                      <joint name="right_jaw" axis="0 -1 0" />
+                      <geom name="right_pad" pos="0 0 .072" size=".035 .006 .043" mass=".05" />
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+    <geom name="floor" type="plane" size="2 2 .1" rgba=".25 .28 .3 1" />
+    <body name="table" pos=".35 0 .375">
+      <geom name="table_top" type="box" size=".55 .45 .025" rgba=".62 .58 .50 1" friction="1 .01 .001" />
+    </body>
+    <light name="key_light" pos="0 -1 2" dir=".2 .3 -1" diffuse=".85 .85 .85" />
+    <camera name="overview" pos="1.25 -1.15 1.35" xyaxes=".75 .66 0 -.34 .39 .86" fovy="48" />
+    <body name="cup0" pos="0.46 -0.14 0.438">
+      <freejoint name="cup0_free" />
+      <geom name="cup0_bottom" type="cylinder" size=".027 .004" pos="0 0 -.03" mass=".03" rgba="0.80000001 0.12 0.12 1" friction="1.2 .01 .001" />
+      <geom name="cup0_lid" type="cylinder" size=".027 .003" pos="0 0 .032" mass=".006" rgba="0.80000001 0.12 0.12 1" friction="1.2 .01 .001" />
+      <geom name="cup0_wall0" type="box" size=".004 .008 .032" pos="0.026 0 0" euler="0 0 0.0" mass=".004" rgba="0.80000001 0.12 0.12 1" friction="1.2 .01 .001" />
+      <geom name="cup0_wall1" type="box" size=".004 .008 .032" pos="0.02251666 0.013 0" euler="0 0 0.5235987755982988" mass=".004" rgba="0.80000001 0.12 0.12 1" friction="1.2 .01 .001" />
+      <geom name="cup0_wall2" type="box" size=".004 .008 .032" pos="0.013 0.02251666 0" euler="0 0 1.0471975511965976" mass=".004" rgba="0.80000001 0.12 0.12 1" friction="1.2 .01 .001" />
+      <geom name="cup0_wall3" type="box" size=".004 .008 .032" pos="1.5920408e-18 0.026 0" euler="0 0 1.5707963267948966" mass=".004" rgba="0.80000001 0.12 0.12 1" friction="1.2 .01 .001" />
+      <geom name="cup0_wall4" type="box" size=".004 .008 .032" pos="-0.013 0.02251666 0" euler="0 0 2.0943951023931953" mass=".004" rgba="0.80000001 0.12 0.12 1" friction="1.2 .01 .001" />
+      <geom name="cup0_wall5" type="box" size=".004 .008 .032" pos="-0.02251666 0.013 0" euler="0 0 2.6179938779914944" mass=".004" rgba="0.80000001 0.12 0.12 1" friction="1.2 .01 .001" />
+      <geom name="cup0_wall6" type="box" size=".004 .008 .032" pos="-0.026 3.1840817e-18 0" euler="0 0 3.141592653589793" mass=".004" rgba="0.80000001 0.12 0.12 1" friction="1.2 .01 .001" />
+      <geom name="cup0_wall7" type="box" size=".004 .008 .032" pos="-0.02251666 -0.013 0" euler="0 0 3.665191429188092" mass=".004" rgba="0.80000001 0.12 0.12 1" friction="1.2 .01 .001" />
+      <geom name="cup0_wall8" type="box" size=".004 .008 .032" pos="-0.013 -0.02251666 0" euler="0 0 4.1887902047863905" mass=".004" rgba="0.80000001 0.12 0.12 1" friction="1.2 .01 .001" />
+      <geom name="cup0_wall9" type="box" size=".004 .008 .032" pos="-4.7761225e-18 -0.026 0" euler="0 0 4.71238898038469" mass=".004" rgba="0.80000001 0.12 0.12 1" friction="1.2 .01 .001" />
+      <geom name="cup0_wall10" type="box" size=".004 .008 .032" pos="0.013 -0.02251666 0" euler="0 0 5.235987755982989" mass=".004" rgba="0.80000001 0.12 0.12 1" friction="1.2 .01 .001" />
+      <geom name="cup0_wall11" type="box" size=".004 .008 .032" pos="0.02251666 -0.013 0" euler="0 0 5.759586531581287" mass=".004" rgba="0.80000001 0.12 0.12 1" friction="1.2 .01 .001" />
+      <geom name="cup0_handle0" type="capsule" fromto="0.03 0 -0.02 0.048 0 -0.02" size=".004" mass=".002" rgba="0.80000001 0.12 0.12 1" />
+      <geom name="cup0_handle1" type="capsule" fromto="0.048 0 -0.02 0.048 0 0.02" size=".004" mass=".002" rgba="0.80000001 0.12 0.12 1" />
+      <geom name="cup0_handle2" type="capsule" fromto="0.048 0 0.02 0.03 0 0.02" size=".004" mass=".002" rgba="0.80000001 0.12 0.12 1" />
+    </body>
+    <body name="target0" pos="0.37 0.16 0.414">
+      <geom name="plate0" type="cylinder" size=".067 .005" pos="0 0 -.005" rgba="0.8 0.12 0.12 1" />
+      <geom name="plate0_rim0" type="sphere" size=".008" pos="0.064 0 0.001" rgba="0.8 0.12 0.12 1" />
+      <geom name="plate0_rim1" type="sphere" size=".008" pos="0.060867617 0.019777088 0.001" rgba="0.8 0.12 0.12 1" />
+      <geom name="plate0_rim2" type="sphere" size=".008" pos="0.051777088 0.037618256 0.001" rgba="0.8 0.12 0.12 1" />
+      <geom name="plate0_rim3" type="sphere" size=".008" pos="0.037618256 0.051777088 0.001" rgba="0.8 0.12 0.12 1" />
+      <geom name="plate0_rim4" type="sphere" size=".008" pos="0.019777088 0.060867617 0.001" rgba="0.8 0.12 0.12 1" />
+      <geom name="plate0_rim5" type="sphere" size=".008" pos="3.9188698e-18 0.064 0.001" rgba="0.8 0.12 0.12 1" />
+      <geom name="plate0_rim6" type="sphere" size=".008" pos="-0.019777088 0.060867617 0.001" rgba="0.8 0.12 0.12 1" />
+      <geom name="plate0_rim7" type="sphere" size=".008" pos="-0.037618256 0.051777088 0.001" rgba="0.8 0.12 0.12 1" />
+      <geom name="plate0_rim8" type="sphere" size=".008" pos="-0.051777088 0.037618256 0.001" rgba="0.8 0.12 0.12 1" />
+      <geom name="plate0_rim9" type="sphere" size=".008" pos="-0.060867617 0.019777088 0.001" rgba="0.8 0.12 0.12 1" />
+      <geom name="plate0_rim10" type="sphere" size=".008" pos="-0.064 7.8377395e-18 0.001" rgba="0.8 0.12 0.12 1" />
+      <geom name="plate0_rim11" type="sphere" size=".008" pos="-0.060867617 -0.019777088 0.001" rgba="0.8 0.12 0.12 1" />
+      <geom name="plate0_rim12" type="sphere" size=".008" pos="-0.051777088 -0.037618256 0.001" rgba="0.8 0.12 0.12 1" />
+      <geom name="plate0_rim13" type="sphere" size=".008" pos="-0.037618256 -0.051777088 0.001" rgba="0.8 0.12 0.12 1" />
+      <geom name="plate0_rim14" type="sphere" size=".008" pos="-0.019777088 -0.060867617 0.001" rgba="0.8 0.12 0.12 1" />
+      <geom name="plate0_rim15" type="sphere" size=".008" pos="-1.1756609e-17 -0.064 0.001" rgba="0.8 0.12 0.12 1" />
+      <geom name="plate0_rim16" type="sphere" size=".008" pos="0.019777088 -0.060867617 0.001" rgba="0.8 0.12 0.12 1" />
+      <geom name="plate0_rim17" type="sphere" size=".008" pos="0.037618256 -0.051777088 0.001" rgba="0.8 0.12 0.12 1" />
+      <geom name="plate0_rim18" type="sphere" size=".008" pos="0.051777088 -0.037618256 0.001" rgba="0.8 0.12 0.12 1" />
+      <geom name="plate0_rim19" type="sphere" size=".008" pos="0.060867617 -0.019777088 0.001" rgba="0.8 0.12 0.12 1" />
+    </body>
+    <body name="target1" pos="0.61 0.16 0.414">
+      <geom name="plate1" type="cylinder" size=".067 .005" pos="0 0 -.005" rgba="0.1 0.3 0.85 1" />
+      <geom name="plate1_rim0" type="sphere" size=".008" pos="0.064 0 0.001" rgba="0.1 0.3 0.85 1" />
+      <geom name="plate1_rim1" type="sphere" size=".008" pos="0.060867617 0.019777088 0.001" rgba="0.1 0.3 0.85 1" />
+      <geom name="plate1_rim2" type="sphere" size=".008" pos="0.051777088 0.037618256 0.001" rgba="0.1 0.3 0.85 1" />
+      <geom name="plate1_rim3" type="sphere" size=".008" pos="0.037618256 0.051777088 0.001" rgba="0.1 0.3 0.85 1" />
+      <geom name="plate1_rim4" type="sphere" size=".008" pos="0.019777088 0.060867617 0.001" rgba="0.1 0.3 0.85 1" />
+      <geom name="plate1_rim5" type="sphere" size=".008" pos="3.9188698e-18 0.064 0.001" rgba="0.1 0.3 0.85 1" />
+      <geom name="plate1_rim6" type="sphere" size=".008" pos="-0.019777088 0.060867617 0.001" rgba="0.1 0.3 0.85 1" />
+      <geom name="plate1_rim7" type="sphere" size=".008" pos="-0.037618256 0.051777088 0.001" rgba="0.1 0.3 0.85 1" />
+      <geom name="plate1_rim8" type="sphere" size=".008" pos="-0.051777088 0.037618256 0.001" rgba="0.1 0.3 0.85 1" />
+      <geom name="plate1_rim9" type="sphere" size=".008" pos="-0.060867617 0.019777088 0.001" rgba="0.1 0.3 0.85 1" />
+      <geom name="plate1_rim10" type="sphere" size=".008" pos="-0.064 7.8377395e-18 0.001" rgba="0.1 0.3 0.85 1" />
+      <geom name="plate1_rim11" type="sphere" size=".008" pos="-0.060867617 -0.019777088 0.001" rgba="0.1 0.3 0.85 1" />
+      <geom name="plate1_rim12" type="sphere" size=".008" pos="-0.051777088 -0.037618256 0.001" rgba="0.1 0.3 0.85 1" />
+      <geom name="plate1_rim13" type="sphere" size=".008" pos="-0.037618256 -0.051777088 0.001" rgba="0.1 0.3 0.85 1" />
+      <geom name="plate1_rim14" type="sphere" size=".008" pos="-0.019777088 -0.060867617 0.001" rgba="0.1 0.3 0.85 1" />
+      <geom name="plate1_rim15" type="sphere" size=".008" pos="-1.1756609e-17 -0.064 0.001" rgba="0.1 0.3 0.85 1" />
+      <geom name="plate1_rim16" type="sphere" size=".008" pos="0.019777088 -0.060867617 0.001" rgba="0.1 0.3 0.85 1" />
+      <geom name="plate1_rim17" type="sphere" size=".008" pos="0.037618256 -0.051777088 0.001" rgba="0.1 0.3 0.85 1" />
+      <geom name="plate1_rim18" type="sphere" size=".008" pos="0.051777088 -0.037618256 0.001" rgba="0.1 0.3 0.85 1" />
+      <geom name="plate1_rim19" type="sphere" size=".008" pos="0.060867617 -0.019777088 0.001" rgba="0.1 0.3 0.85 1" />
+    </body>
+  </worldbody>
+  <actuator>
+    <general class="size3" name="shoulder_pan" joint="shoulder_pan_joint" />
+    <general class="size3" name="shoulder_lift" joint="shoulder_lift_joint" />
+    <general class="size3_limited" name="elbow" joint="elbow_joint" />
+    <general class="size1" name="wrist_1" joint="wrist_1_joint" />
+    <general class="size1" name="wrist_2" joint="wrist_2_joint" />
+    <general class="size1" name="wrist_3" joint="wrist_3_joint" />
+    <position name="left_jaw_motor" joint="left_jaw" kp="150" kv="5" ctrlrange="0 .045" forcerange="-8 8" />
+    <position name="right_jaw_motor" joint="right_jaw" kp="150" kv="5" ctrlrange="0 .045" forcerange="-8 8" />
+  </actuator>
+  <visual>
+    <global offwidth="640" offheight="480" />
+  </visual>
+  <keyframe>
+    <key name="home" qpos="-3.4585093 -1.7287966 2.0204557 -1.8624598 -1.5707956 -1.8877131 0.045 0.045 0.46219139 -0.14368341 0.438 1 0 0 0" ctrl="-3.4585093 -1.7287966 2.0204557 -1.8624598 -1.5707956 -1.8877131 0.045 0.045" />
+  </keyframe>
+</mujoco>
